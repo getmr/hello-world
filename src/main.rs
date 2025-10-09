@@ -59,6 +59,19 @@ async fn res_error() -> Result<&'static str, MyError> {
     Err(MyError::bad_request("test".to_string()))
 }
 
+#[get("/resp")]
+async fn res_resp() -> impl Responder {
+    let obj = response::resp::BaseResp::new(200, "success".to_owned(), "test".to_owned());
+    obj
+}
+
+#[get("/resp_json")]
+async fn res_resp_json() -> impl Responder {
+    let obj = response::resp::BaseResp::new(200, "success".to_owned(), response::json::MyObj { name: "John Doe".to_owned() });
+    obj
+}
+
+
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -82,6 +95,8 @@ async fn main() -> std::io::Result<()> {
             .service(add_numbers)
             .service(json_response)
             .service(res_error)
+            .service(res_resp)
+            .service(res_resp_json)
     })
     .workers(4)
     .bind(("127.0.0.1", 8080))?

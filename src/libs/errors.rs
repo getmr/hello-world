@@ -31,7 +31,13 @@ pub enum MyError {
 
     #[error("禁止访问: {0}")]
     Forbidden(String),
-    
+    #[error("invalid header (expected {expected:?}, found {found:?})")]
+    InvalidHeader {
+        expected: String,
+        found: String,
+    },
+    #[error("unknown data store error")]
+    Unknown(String),
 
 }
 
@@ -56,6 +62,8 @@ impl error::ResponseError for MyError {
             MyError::NotFound(_) => StatusCode::NOT_FOUND,
             MyError::Unauthorized(_) => StatusCode::UNAUTHORIZED,
             MyError::Forbidden(_) => StatusCode::FORBIDDEN,
+            MyError::InvalidHeader { .. } => StatusCode::BAD_REQUEST,
+            MyError::Unknown(_) => StatusCode::INTERNAL_SERVER_ERROR,
         }
     }
 }
@@ -89,6 +97,14 @@ impl MyError {
 
     pub fn forbidden(msg: impl Into<String>) -> Self {
         Self::Forbidden(msg.into())
+    }
+
+    pub fn invalid_header(expected: impl Into<String>, found: impl Into<String>) -> Self {
+        Self::InvalidHeader { expected: expected.into(), found: found.into() }
+    }
+
+    pub fn unknown() -> Self {
+        Self::Unknown(String::new())
     }
 }
 
