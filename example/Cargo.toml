@@ -1,0 +1,21 @@
+[package]
+name = "example"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# 如果需要使用主项目的功能，可以添加：
+# hello-world = { version = "0.1.0", path = ".." }
+# entity = { version = "0.1.0", path = "../entity" }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }
+
+
+[[example]]
+name = "tokio_demo"
+path = "tokio_demo.rs"
+
+[[example]]
+name = "arc_demo"
+path = "arc_demo.rs"
