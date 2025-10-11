@@ -11,5 +11,5 @@ async fn main() {
         yield_now().await;
 
         println!("{}", rc);
-    });
+    }).await.unwrap();
 }
