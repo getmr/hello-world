@@ -75,7 +75,7 @@ async fn res_resp_json() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let db_url = "mysql://root:root@localhost:3306/hello_world".to_owned();
+    let db_url = "mysql://root:rootpassword@localhost:3306/hello_world".to_owned();
     let conn = Database::connect(&db_url).await.unwrap();
     let state = AppState { app_name: "Actix Web Example".to_string(), conn };
 
