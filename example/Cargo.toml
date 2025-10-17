@@ -20,3 +20,11 @@ path = "tokio_demo.rs"
 [[example]]
 name = "arc_demo"
 path = "arc_demo.rs"
+
+[[example]]
+name = "file_io"
+path = "file_io.rs"
+
+[[example]]
+name = "async_depth"
+path = "async_depth.rs"
