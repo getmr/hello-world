@@ -28,3 +28,7 @@ path = "file_io.rs"
 [[example]]
 name = "async_depth"
 path = "async_depth.rs"
+
+[[example]]
+name = "select_demo"
+path = "select_demo.rs"
